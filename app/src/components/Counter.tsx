@@ -1,35 +1,10 @@
 import React, {useReducer} from 'react'
-
-type stateStructure = {
-    count : number
-}
-
-type types = 'increment' | 'decrement'  | 'reset'
-
-type actionStructure = {
-    type : types, // define the type of action
-    payload ? : number // some information can send 
-}
-
-// necessary declare reducer function outside
-const reducer = (state : stateStructure, action : actionStructure) : stateStructure => {
-
-    const payload = action.payload? action.payload : 1
-
-    switch(action.type) {
-        case 'increment' : return {count : state.count + payload}
-        case 'decrement' : return {count : state.count - payload}
-        case 'reset' : return initialState
-        default : return state
-    }
-}
-
-// initial state
-const initialState : stateStructure = {count : 0}
+import { counterReducer, counterInitialState } from '../reducers/counter.reducer'
 
 function Counter() {
 
-    const [state, dispatch] = useReducer(reducer, initialState)
+    const [state, dispatch] = useReducer(counterReducer, counterInitialState)
+
     return  (
         <div className="counter">
             <h2>Counter</h2>
